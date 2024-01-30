@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 import "../styles/SignUp.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export const SignUp = () => {
 	const navigate = useNavigate();
@@ -10,36 +12,34 @@ export const SignUp = () => {
 		email: "",
 		password: "",
 	});
-	const [signupRequestPayload, setSignupRequestPayload] = useState({
-		username: "",
-		email: "",
-		password: "",
-	});
 
+	// user typing in their info
 	const handleChange = (e) => {
 		const { name, value } = e.target; //  gets the entire input from the html
-		setSignupForm((prevForm) => ({ ...prevForm, [name]: value }));
+		setSignupForm((prev) => ({ ...prev, [name]: value }));
 	};
 
+	// user submitting their info to sign up
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setSignupRequestPayload({ ...signupForm });
 
-		navigate("/login");
+		sendSignUpInfo(); // make an api call to send sign up data to server
+
+		
 	};
 
-	// make an api call to send sign up data to server
-	useEffect(() => {
-		const sendSignUpInfo = async () => {
-			const res = await axios.post("http://localhost:8080/api/auth/signUp", {
-				signupRequestPayload,
-			});
-
-        console.log(res.data);
-		};
-
-		sendSignUpInfo();
-	}, [signupRequestPayload.email]);
+	const sendSignUpInfo = async () => {
+		try {
+			const res = await axios.post("http://localhost:8080/api/auth/signUp", signupForm);
+			
+			console.log(res.data);
+			toast.success("Sign Up Successful!");
+			navigate("/login");
+		} catch (err) {
+			console.log(err);
+			toast.error("Registration failed!");
+		}
+	};
 
 	return (
 		<div className="register-section">
@@ -135,6 +135,7 @@ export const SignUp = () => {
 				</div>
 				<div className="col-md-3"></div>
 			</div>
+			<ToastContainer position="top-center" hideProgressBar={true} autoClose={3000} theme="light" closeOnClick />
 		</div>
 	);
 };

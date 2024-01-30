@@ -1,6 +1,60 @@
-.login-words {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5%;
+.login-section{
+    margin: 6rem;
+}
+
+.login-failed{
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+    border: 2px solid black;
+    width: 65%;    
+    background-color: red;
+}
+
+.login-failed-text{
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bold;    
+    color: aliceblue;
+}
+
+/* Media queries for responsiveness */
+@media screen and (min-width: 350px) {
+    .login-section {
+        margin: 15% 5%;
+    }
+
+    .login-failed {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .login-section {
+        margin: 15% 5%;
+    }
+
+    .login-failed {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .login-section {
+        margin: 100px;
+    }
+
+    .login-failed {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .login-section {
+        margin: 100px;
+    }
+
+    .login-failed {
+        width: 40%;
+    }
 }

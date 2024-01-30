@@ -1,0 +1,17 @@
+.home { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5%;
+}
+
+.reddit-body .container {
+    margin-top: 4rem;
+}
+
+.row .post{
+    border: 1px black solid;
+    margin: 2em 0;
+    padding: 1em;
+    border-radius: 10px;
+}
