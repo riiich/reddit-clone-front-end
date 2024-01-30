@@ -1,28 +1,41 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/CreateSubreddit.css";
+import axios from "axios";
 
 export const CreateSubreddit = () => {
 	const [subredditInfo, setSubredditInfo] = useState({
-		title: "",
+		subRedditName: "",
 		description: "",
 	});
 	const navigate = useNavigate();
 
-	const createSubreddit = () => {
-		navigate("/list-subreddits");
+	const createSubreddit = async () => {
+		try {
+			const res = await axios.post("http://localhost:8080/api/r", subredditInfo, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+					'Content-Type': "application/json",
+				}
+			});
+
+			console.log(res.data);
+
+			navigate("/subreddits");
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	const discard = () => {
-		navigate("/");	
+		navigate("/");
 	};
 
 	const handleChange = (e) => {
-		const {name, value} = e.target;
+		const { name, value } = e.target;
 
-		setSubredditInfo((s) => ({...s, [name]: value}));
+		setSubredditInfo((s) => ({ ...s, [name]: value }));
 	};
-
 
 	return (
 		<div className="container">
@@ -35,8 +48,8 @@ export const CreateSubreddit = () => {
 							<input
 								type="text"
 								className="form-control"
-								name="title"
-								value={subredditInfo.title}
+								name="subRedditName"
+								value={subredditInfo.subRedditName}
 								onChange={handleChange}
 								style={{ marginTop: "5px" }}
 								placeholder="Title"
