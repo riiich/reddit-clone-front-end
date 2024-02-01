@@ -2,7 +2,7 @@ import "../styles/SinglePost.css";
 import { useState, useEffect } from "react";
 import { FaComments } from "react-icons/fa";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { VoteButton } from "./VoteButton";
 
 export const SinglePost = () => {
@@ -13,7 +13,7 @@ export const SinglePost = () => {
 		const fetchPosts = async () => {
 			try {
 				const res = await axios.get("http://localhost:8080/api/posts");
-				
+
 				setPosts(res.data);
 			} catch (error) {
 				console.error("Error fetching posts:", error);
@@ -37,12 +37,12 @@ export const SinglePost = () => {
 					<div className="col-md-11">
 						<span className="subreddit-info">
 							<span className="subreddit-text">
-								<a className="posturl" href="#">
+								<Link className="posturl" to="">
 									{post.subredditName}
-								</a>
+								</Link>
 							</span>
 							<span>
-								Posted by <a href="#">u/{post.userName}</a>
+								Posted by <Link to="">u/{post.userName}</Link>
 							</span>
 							<span>&nbsp;{post.duration}</span>
 						</span>
@@ -57,10 +57,10 @@ export const SinglePost = () => {
 						</div>
 						<hr />
 						<span>
-							<a className="btnCommments" role="button">
+							<Link className="btnCommments" role="button">
 								<FaComments />
 								Comments ({post.commentCount})
-							</a>
+							</Link>
 							<button className="login" onClick={() => goToPost(post.id)}>
 								Read Post
 							</button>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/CreateSubreddit.css";
 import axios from "axios";
@@ -15,8 +15,8 @@ export const CreateSubreddit = () => {
 			const res = await axios.post("http://localhost:8080/api/r", subredditInfo, {
 				headers: {
 					Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-					'Content-Type': "application/json",
-				}
+					"Content-Type": "application/json",
+				},
 			});
 
 			console.log(res.data);

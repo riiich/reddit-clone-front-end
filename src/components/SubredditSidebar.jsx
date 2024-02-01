@@ -32,7 +32,7 @@ export const SubredditSidebar = () => {
 			{subreddits?.map((subreddit) => (
 				<div key={subreddit.subRedditId}>
 					<span>
-						<a href={`/view-subreddit/${subreddit.id}`}>r/{subreddit.subRedditName}</a>
+						<a href={`/view-subreddit/${subreddit.id}`}>r/ {subreddit.subRedditName}</a>
 						<hr />
 					</span>
 				</div>
